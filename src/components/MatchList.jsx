@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box } from "@material-ui/core";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 import ErrorIcon from "@material-ui/icons/Error";
 
-import { GET_ALL_MATCHES, getMatches } from "../graphql/queries";
+import {
+  GET_ALL_MATCHES,
+  GET_LIVE_MATCHES,
+  getMatches,
+} from "../graphql/queries";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
 function MatchList() {
   const classes = useStyles();
   const [finished, setFinished] = useState(true);
-  const { loading, error, data } = useQuery(getMatches(finished));
+  // const { loading, error, data } = useQuery(getMatches(finished));
+  const { loading, error, data } = useSubscription(GET_LIVE_MATCHES);
 
   if (loading) return "Loading...";
   if (error)

@@ -56,6 +56,29 @@ export const getMatches = (finished) => {
   `;
 };
 
+export const GET_LIVE_MATCHES = gql`
+  subscription LiveMatches {
+    matches(
+      where: { finished: { _eq: false } }
+      order_by: { started_at: desc }
+    ) {
+      id
+      started_at
+      p1 {
+        name
+      }
+      p2 {
+        name
+      }
+      winner_ref
+      setts {
+        p1_score
+        p2_score
+      }
+    }
+  }
+`;
+
 // export const GET_ALL_LIVE_MATCHES = gql`
 //   query FinishedMatches {
 //     matches(
