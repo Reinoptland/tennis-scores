@@ -31,8 +31,6 @@ function MatchList() {
         Error! ${error.message}
       </p>
     );
-
-  console.log(data);
   return (
     <Container className={classes.root}>
       <Typography variant="h2">All Matches</Typography>
